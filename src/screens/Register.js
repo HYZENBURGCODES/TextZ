@@ -8,29 +8,31 @@ import { MaterialIcons,Entypo,Ionicons,Feather } from '@expo/vector-icons';
 const WIDTH = Dimensions.get("window").width;
 const HEIGHT = Dimensions.get("window").height;
 
-export default function Welcome({navigation}) {
+export default function Register({navigation}) {
     
     let [fontsLoaded] = useFonts({Inter_900Black,});
     const [number, onChangenumber] = React.useState("");
+    const [name, onChangename] = React.useState("");
     const [number_Width, setNumberWidth] = React.useState(0);
+    const [name_Width, setNameWidth] = React.useState(0);
 
-    const sign_in=()=>{
+    const sign_up=()=>{
 
       var length_number= number.length;
+
+      if(!number || !name)
+      {
+          Alert.alert("Invalid","Empty Field Detected")
+      }
       if(length_number!==10)
       {
         Alert.alert("Invalid","Number Incorrect")
       }
       else{
-        navigation.navigate("Home");
+        Alert.alert("Success","Registration Successfull!")
+        navigation.navigate("Chat_Page");
       }
     }
-
-    const sign_up=()=>
-    {
-      navigation.navigate("Register");
-    }
-
 
     if (!fontsLoaded) {
     return <AppLoading />;
@@ -43,9 +45,31 @@ export default function Welcome({navigation}) {
         backgroundColor="#2a4fd9"
         translucent={false}
       />
-        <Text style={styles.signature_text}>Welcme to {'\n'} TextZ</Text>
+        <Text style={styles.signature_text}>Sign Up with {'\n'} TextZ</Text>
         <View style={styles.inner_container}>
           <Text style={styles.discription_text}>TextZ is a Worlwide Available Online Text and Calling Application, whcih will be completly free and with End-To-End Encryption Audio and Video Calls.</Text>
+        
+          <TextInput
+          onFocus={() => setNumberWidth(1)}
+          onBlur={() => setNumberWidth(0)}
+          placeholder="Enter Your User Name"
+          placeholderTextColor="#8E929C"
+          returnKeyType="done"
+          blurOnSubmit={true}
+          onSubmitEditing={() => {
+            Keyboard.dismiss();
+          }}
+          style={{
+            ...styles.input,
+            borderBottomWidth: name_Width,
+            borderColor: "#2a4fd9",
+            top:25,
+            marginLeft:50,
+            marginRight:50,
+          }}
+          onChangeText={onChangename}
+          value={name}/>
+     
           <TextInput
           onFocus={() => setNumberWidth(1)}
           onBlur={() => setNumberWidth(0)}
@@ -61,32 +85,25 @@ export default function Welcome({navigation}) {
             ...styles.input,
             borderBottomWidth: number_Width,
             borderColor: "#2a4fd9",
-            top:25,
+            top:60,
             marginLeft:50,
             marginRight:50,
           }}
           onChangeText={onChangenumber}
-          value={number}
-        ></TextInput>
+          value={number}/>
      
-        <TouchableOpacity style={styles.login_button} onPress={sign_in}>
+        <TouchableOpacity style={styles.login_button} onPress={sign_up}>
           <Text style={{...styles.discription_text,color:"#fff",alignSelf:"center",bottom:10}}>
-            Sign In
+            Sign up
           </Text>
         </TouchableOpacity>
-      
 
-        <Text style={{...styles.discription_text,alignSelf:"center",marginTop:50}}>
-            If you're new to TextZ Sign in with TextZ
-          </Text>
-
-     
-          <TouchableOpacity style={{...styles.login_button,marginTop:20}}  onPress={sign_up}>
-          <Text style={{...styles.discription_text,color:"#fff",alignSelf:"center",bottom:10}}>
-            Sign Up
-          </Text>
+        <TouchableOpacity>
+            <Text style={{...styles.discription_text,color:"#000",alignSelf:"center",}}>
+                Terms & Condiitions 
+            </Text>
         </TouchableOpacity>
-  
+
 
         <Text style={{...styles.discription_text,alignSelf:"center",marginTop:40,fontSize:30,color:"#2a4fd9"}}>
             TextZ <Text style={{...styles.discription_text,alignSelf:"center",marginTop:40,fontSize:30,color:"#000"}}>Offers you</Text>
@@ -151,6 +168,6 @@ const styles = StyleSheet.create({
     backgroundColor:"#2a4fd9",
     alignSelf:"center",
     borderRadius:50,
-    marginTop:50
+    marginTop:100
   }
 });
