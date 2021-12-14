@@ -7,6 +7,7 @@ import Welcome from '../screens/Welcome';
 import Register from '../screens/Register';
 import Home from '../screens/Home';
 import Call_Screen from '../screens/Call_Screen';
+import Settings_Page from '../screens/Settings_Page';
 
 const Stack = createStackNavigator();
 
@@ -21,7 +22,8 @@ export default function Navigation() {
         <Stack.Screen name="Welcome" component={Welcome} />       
         <Stack.Screen name="Register" component={Register} />     
         <Stack.Screen name="Home" component={Home} />    
-        <Stack.Screen name="Call_Screen" component={Call_Screen} />    
+        <Stack.Screen name="Call_Screen" component={Call_Screen} /> 
+        <Stack.Screen name="Settings_Page" component={Settings_Page} />       
       </Stack.Navigator>
     </NavigationContainer>
   );

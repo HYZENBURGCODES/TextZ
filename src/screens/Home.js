@@ -135,7 +135,7 @@ return (
       <Ionicons name="ios-call-sharp" size={24} color="#fff" style={{paddingHorizontal:60}}/>
       </TouchableOpacity>
 
-      <TouchableOpacity>
+      <TouchableOpacity onPress={()=>{navigation.navigate("Settings_Page")}}>
       <Ionicons name="settings" size={24} color="#fff" style={{paddingHorizontal:60}}/>   
       </TouchableOpacity>
           </View>     
